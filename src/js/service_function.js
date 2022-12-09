@@ -7,6 +7,7 @@ import { onSearchPictures } from './observer';
 export const formEl = document.querySelector('.search-form');
 export const galleryEl = document.querySelector('.gallery');
 export const target = document.querySelector('.js-guard');
+export let totalHitsCounter = 0;
 
 formEl.addEventListener('submit', onSearchPictures);
 
@@ -18,6 +19,7 @@ let gallery = new SimpleLightbox('.gallery a', {
 export function renderMarkup(resp) {
   resp
     .then(({ hits, totalHits }) => {
+      totalHitsCounter = totalHits;
       if (!totalHits) {
         Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -85,3 +87,6 @@ function smoothScroll() {
   });
 }
 
+export function totalHitsMessage() {
+  Notify.info(`Hooray! We found ${totalHitsCounter} images.`);
+}

@@ -3,6 +3,7 @@ import { fetchPictures } from './API';
 import { formEl } from './service_function';
 import { galleryEl } from './service_function';
 import { target } from './service_function';
+import { totalHitsMessage } from './service_function';
 
 export let page = 1;
 
@@ -30,5 +31,8 @@ export function onSearchPictures(event) {
     page = 1;
     galleryEl.innerHTML = '';
     renderMarkup(fetchPictures(formEl.elements.searchQuery.value));
+    const timerId = setTimeout(totalHitsMessage, 500);
   }
 }
+
+
